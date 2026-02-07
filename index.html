@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Valentine Mini Game 💙</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+  <div class="page-center">
+    <div class="stack">
+
+      <!-- GAME (starts hidden) -->
+      <div class="valentine-container is-hidden" id="game">
+        <div class="valentine-header">
+          <div class="header-small">Select all images with</div>
+          <div class="header-large">Your Valentine</div>
+        </div>
+
+        <div class="valentine-grid" id="valentineGrid"></div>
+
+        <div class="game-error is-hidden" id="gameError">
+          Nope — try again (select all photos with your Valentine)
+        </div>
+
+
+        <div class="valentine-footer">
+          <div class="footer-icons">
+            <button class="icon-btn" id="btnRefresh" title="Refresh">⟳</button>
+            <button class="icon-btn" title="Audio">🎤</button>
+            <button class="icon-btn" title="Info">ℹ️</button>
+          </div>
+          <button class="verify-btn" id="btnVerify">VERIFY</button>
+        </div>
+      </div>
+
+      <!-- CAPTCHA (starts visible) -->
+      <div class="firstValentine-container" id="captcha">
+        <div class="firstValentine-content">
+          <div class="checkbox-wrapper" id="firstValentine-checkboxWrapper">
+            <div id="firstValentine-checkbox" class="checkbox-box"></div>
+
+            <div id="firstValentine-loader" class="loader-spinner"></div>
+
+            <div id="firstValentine-checkmark" class="checkmark-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+              </svg>
+            </div>
+
+            <span class="firstValentine-text">I'm not a robot</span>
+          </div>
+
+          <div class="firstValentine-brand">
+            <div class="brand-logo">
+              <svg viewBox="0 0 24 24" width="32" height="32" aria-hidden="true">
+                <path fill="#4A90E2"
+                  d="M12,4V1L8,5l4,4V6c3.31,0,6,2.69,6,6c0,1.01-0.25,1.97-0.7,2.8l1.46,1.46C19.54,15.03,20,13.57,20,12C20,7.58,16.42,4,12,4z" />
+                <path fill="#9B9B9B"
+                  d="M12,18c-3.31,0-6-2.69-6-6c0-1.01,0.25-1.97,0.7-2.8L5.24,7.74C4.46,8.97,4,10.43,4,12c0,4.42,3.58,8,8,8v3l4-4l-4-4V18z" />
+              </svg>
+            </div>
+            <div class="brand-text">reValentine</div>
+            <div class="brand-links">
+              <a href="#">Privacy</a> - <a href="#">Terms</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>

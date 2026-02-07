@@ -1,0 +1,396 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap');
+
+/* PAGE CENTERING */
+body {
+  margin: 0;
+  background: white;
+  font-family: 'Roboto', sans-serif;
+  min-height: 100vh;
+}
+
+.page-center {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+}
+
+/* GAME CONTAINER */
+.valentine-container {
+  width: 400px;
+  background: #f9f9f9;
+  border: 1px solid #d3d3d3;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  padding: 8px;
+  user-select: none;
+}
+
+/* HEADER */
+.valentine-header {
+  background-color: #4a90e2;
+  color: white;
+  padding: 24px;
+  margin-bottom: 4px;
+}
+
+.header-small {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.header-large {
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+/* GRID */
+.valentine-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  background-color: #fff;
+}
+
+.grid-item {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.1s;
+}
+
+.grid-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.grid-item.selected {
+  transform: scale(0.9);
+}
+
+.grid-item.selected::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2px solid #fff;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* CHECKMARK (grid selection) */
+.checkmark {
+  display: none;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 24px;
+  height: 24px;
+  background-color: #4a90e2;
+  border-radius: 50%;
+}
+
+.grid-item.selected .checkmark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.grid-item.selected .checkmark::before {
+  content: '✓';
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* FOOTER */
+.valentine-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 4px;
+  border-top: 1px solid #eee;
+  margin-top: 8px;
+}
+
+.footer-icons {
+  display: flex;
+  gap: 12px;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  opacity: 0.6;
+}
+
+.icon-btn:hover {
+  opacity: 1;
+}
+
+.verify-btn {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  font-weight: 700;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.verify-btn:hover {
+  background-color: #357abd;
+}
+
+/* Stack */
+.stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Utility */
+.is-hidden { display: none !important; }
+
+/* Smooth transition between captcha and game */
+#captcha {
+  transform-origin: center;
+  transition: opacity 250ms ease, transform 250ms ease;
+}
+
+#captcha.is-fading-out {
+  opacity: 0;
+  transform: scale(0.98);
+  pointer-events: none;
+}
+
+#game {
+  opacity: 0;
+  transform: scale(0.98);
+  transition: opacity 250ms ease, transform 250ms ease;
+}
+
+#game.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* --- FIRST VALENTINE COMPONENT --- */
+.firstValentine-container {
+  width: 302px;
+  height: 76px;
+  background-color: #f9f9f9;
+  border: 1px solid #d3d3d3;
+  border-radius: 3px;
+  box-shadow: 0 0 4px 1px rgba(0,0,0,0.08);
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  box-sizing: border-box;
+  user-select: none;
+  font-family: 'Roboto', sans-serif;
+}
+
+.firstValentine-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.checkbox-box {
+  width: 24px;
+  height: 24px;
+  background-color: #fff;
+  border: 2px solid #c1c1c1;
+  border-radius: 2px;
+  margin-right: 12px;
+  transition: border-color 0.2s, opacity 150ms ease;
+}
+
+.checkbox-wrapper:hover .checkbox-box {
+  border-color: #b2b2b2;
+}
+
+.firstValentine-text {
+  font-size: 14px;
+  color: #282828;
+  font-weight: 400;
+}
+
+/* Spinner and tick live in the checkbox spot */
+.loader-spinner,
+.checkmark-icon {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 150ms ease, transform 150ms ease;
+}
+
+/* Blue spinner */
+.loader-spinner {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #4d90fe;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+@keyframes firstValentineSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Green tick */
+.checkmark-icon svg {
+  width: 24px;
+  height: 24px;
+  fill: #009a2d;
+  transform: translateY(-1px);
+}
+
+/* State classes controlled by JS */
+.checkbox-wrapper.is-idle .checkbox-box { opacity: 1; }
+.checkbox-wrapper.is-idle .loader-spinner { opacity: 0; transform: scale(0.9); }
+.checkbox-wrapper.is-idle .checkmark-icon { opacity: 0; transform: scale(0.9); }
+
+.checkbox-wrapper.is-loading .checkbox-box { opacity: 0; }
+.checkbox-wrapper.is-loading .loader-spinner {
+  opacity: 1;
+  transform: scale(1);
+  animation: firstValentineSpin 0.9s linear infinite;
+}
+.checkbox-wrapper.is-loading .checkmark-icon { opacity: 0; }
+
+.checkbox-wrapper.is-done .checkbox-box { opacity: 0; }
+.checkbox-wrapper.is-done .loader-spinner {
+  opacity: 0;
+  animation: none;
+}
+.checkbox-wrapper.is-done .checkmark-icon {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.firstValentine-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 70px;
+}
+
+.brand-logo {
+  margin-bottom: 2px;
+}
+
+.brand-text {
+  font-size: 10px;
+  color: #555;
+  font-weight: 400;
+  margin-bottom: 2px;
+}
+
+.brand-links {
+  font-size: 8px;
+  color: #555;
+}
+
+.brand-links a {
+  color: #555;
+  text-decoration: none;
+}
+
+.brand-links a:hover {
+  text-decoration: underline;
+}
+
+.game-error {
+  margin-top: 10px;
+  padding: 12px 14px;
+  border: 1px solid #f3c2c2;
+  background: #fff2f2;
+  color: #8a1f1f;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 3px;
+}
+
+/* --- VALENTINE SUCCESS PAGE --- */
+.val-page {
+  width: 400px;               /* match game container width */
+  background: #f9f9f9;
+  border: 1px solid #d3d3d3;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  padding: 8px;
+}
+
+.val-body {
+  background: #fff;
+  padding: 14px;
+  border: 1px solid #eee;
+}
+
+.val-card {
+  background: #f9f9f9;
+  border: 1px solid #eee;
+  padding: 16px;
+}
+
+.val-question {
+  font-size: 18px;
+  font-weight: 900;
+  margin-bottom: 6px;
+  color: #282828;
+}
+
+.val-subtext {
+  font-size: 14px;
+  font-weight: 400;
+  opacity: 0.85;
+  margin-bottom: 14px;
+}
+
+.val-cta {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* Secondary button that visually matches your UI */
+.btn-secondary {
+  background: #fff;
+  color: #282828;
+  border: 1px solid #d3d3d3;
+  padding: 10px 18px;
+  font-weight: 700;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  opacity: 0.9;
+}
+
+.val-footnote {
+  margin-top: 12px;
+  font-size: 12px;
+  opacity: 0.7;
+  text-align: center;
+}
